@@ -45,3 +45,14 @@ terraform.rc
 
 # Private credential document
 /docs/Projects AWS account structure.txt
+
+# KingdomGoods | Local environment files and generated output
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Local account document — never commit credentials
+/docs/Projects AWS account structure.txt
