@@ -33,5 +33,9 @@
 
 ## Day 1 status
 
-In progress: defect backlog, version requirements and basic CI
-checks remain to be completed.
+Complete. The local smoke tests passed, and PR #2 merged the application
+baseline, defect backlog, and CI workflow into `main`.
+
+[Baseline CI passed on `bf2bd9a`](https://github.com/Gabinsime75/KingdomGoods/actions/runs/44713811088).
+The `Protect main` ruleset requires a pull request and the GitHub Actions
+`CI results` check. It also blocks force pushes and branch deletion.
