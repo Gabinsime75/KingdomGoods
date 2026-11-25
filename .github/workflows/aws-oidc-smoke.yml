@@ -1,0 +1,33 @@
+# Verify that KingdomGoods workflows on main can assume the AWS dev role.
+name: AWS OIDC smoke test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify-dev-role:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Assume the AWS dev role
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          aws-region: us-west-2
+          role-to-assume: arn:aws:iam::941377138351:role/kingdomgoods-dev-github-terraform
+          role-session-name: kingdomgoods-oidc-smoke
+
+      - name: Verify the assumed role
+        shell: bash
+        run: |
+          expected_arn="arn:aws:sts::941377138351:assumed-role/kingdomgoods-dev-github-terraform/kingdomgoods-oidc-smoke"
+          actual_arn="$(aws sts get-caller-identity --query Arn --output text)"
+
+          if [[ "$actual_arn" != "$expected_arn" ]]; then
+            printf 'Unexpected AWS identity: %s\n' "$actual_arn" >&2
+            exit 1
+          fi
+
+          printf 'Verified AWS identity: %s\n' "$actual_arn"
