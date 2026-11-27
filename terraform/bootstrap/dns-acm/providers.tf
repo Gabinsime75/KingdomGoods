@@ -20,3 +20,11 @@ provider "aws" {
   profile             = "kingdomgoods-prod"
   allowed_account_ids = ["209479272473"]
 }
+
+# Use the dev account in Oregon for the dev ALB origin certificate.
+provider "aws" {
+  alias               = "dev_usw2"
+  region              = "us-west-2"
+  profile             = "kingdomgoods-dev"
+  allowed_account_ids = ["941377138351"]
+}
