@@ -12,3 +12,11 @@ provider "aws" {
   profile             = "kingdomgoods-prod"
   allowed_account_ids = ["209479272473"]
 }
+
+# Use the prod account in Oregon for the ALB origin certificate.
+provider "aws" {
+  alias               = "prod_usw2"
+  region              = "us-west-2"
+  profile             = "kingdomgoods-prod"
+  allowed_account_ids = ["209479272473"]
+}
